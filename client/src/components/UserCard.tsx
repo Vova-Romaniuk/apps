@@ -7,7 +7,7 @@ interface Coordinates {
 }
 
 export interface User {
-  id?: string;
+  id: string;
   name: { first: string; last: string };
   gender?: string;
   email?: string;
