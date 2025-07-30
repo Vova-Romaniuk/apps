@@ -13,15 +13,18 @@ export default function MainPage() {
       const data = await res.json();
 
       const formattedUsers: User[] = data.results.map((u: any) => ({
-        name: u.name,
+        name: `${u.name.first} ${u.name.last}`,
         gender: u.gender,
         email: u.email,
         location: {
           city: u.location.city,
           country: u.location.country,
-          coordinates: u.location.coordinates,
+          coordinates: {
+            latitude: u.location.coordinates.latitude,
+            longitude: u.location.coordinates.longitude,
+          },
         },
-        picture: u.picture,
+        picture: u.picture.large,
       }));
 
       setUsers((prev) => [...prev, ...formattedUsers]);
@@ -32,8 +35,28 @@ export default function MainPage() {
     }
   };
 
-  const handleSave = (user: User) => {
-    console.log("Saving user:", user);
+  const handleSave = async (user: User) => {
+    try {
+      const response = await fetch("https://apps-yxib.onrender.com/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Save failed:", errorData);
+        alert("Failed to save user");
+        return;
+      }
+
+      alert("User saved successfully!");
+    } catch (err) {
+      console.error("Error saving user", err);
+      alert("Error saving user");
+    }
   };
 
   useEffect(() => {

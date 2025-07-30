@@ -84,7 +84,7 @@ export default function UserCard({ user, onSave, onDelete }: Props) {
     <div className='p-4 flex bg-white/40 backdrop-blur-mg rounded-xl shadow-xl  hover:shadow-lg transition duration-200 relative'>
       <div className='flex items-center gap-4'>
         <img
-          src={user.picture?.large || "/default-avatar.png"}
+          src={user?.picture || "/default-avatar.png"}
           alt='profile'
           className='w-20 h-20 rounded-full object-cover border'
         />
