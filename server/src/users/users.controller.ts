@@ -21,11 +21,6 @@ export class UsersController {
 
   @Post()
   async create(@Body() dto: CreateUserDto) {
-    const exists = await this.usersService.exists(dto.email);
-    if (exists) {
-      throw new BadRequestException('User with this email already exists');
-    }
-
     return this.usersService.create(dto);
   }
 
