@@ -16,9 +16,7 @@ export interface User {
     country?: string;
     coordinates?: Coordinates;
   };
-  picture?: {
-    large: string;
-  };
+  picture?: string;
 }
 
 interface WeatherData {
