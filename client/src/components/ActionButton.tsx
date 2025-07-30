@@ -11,16 +11,26 @@ export default function ActionButton({
   activeText: string;
   color: "green" | "red";
 }) {
-  const base = "w-full px-4 py-2 text-white rounded-lg transition";
-  const styles = isActive
-    ? `bg-${color}-400 cursor-not-allowed`
-    : `bg-${color}-500 hover:bg-${color}-600 cursor-pointer`;
+  const baseClasses = "w-full px-4 py-2 text-white rounded-lg transition";
+  const getColorClasses = () => {
+    if (color === "green") {
+      return isActive
+        ? "bg-green-400 cursor-not-allowed"
+        : "bg-green-500 hover:bg-green-600 cursor-pointer";
+    }
+    if (color === "red") {
+      return isActive
+        ? "bg-red-400 cursor-not-allowed"
+        : "bg-red-500 hover:bg-red-600 cursor-pointer";
+    }
+    return "";
+  };
 
   return (
     <button
       onClick={onClick}
       disabled={isActive}
-      className={`${base} ${styles}`}>
+      className={`${baseClasses} ${getColorClasses()}`}>
       {isActive ? activeText : text}
     </button>
   );

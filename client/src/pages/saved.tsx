@@ -56,7 +56,7 @@ export default function Saved() {
             <UserCard
               key={user.id}
               user={user}
-              onDelete={() => handleDelete(user?.id)}
+              onDelete={() => handleDelete(user.id)}
             />
           ))}
         </div>
